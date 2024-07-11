@@ -42,9 +42,22 @@ def kayit_ekle():
     except Exception as error:
         ui.statusbar.showMessage("Kayıt eklenemedi!" + str(error))
 
+def kayit_listele():
+    ui.tblListele.clear()
+    ui.tblListele.setHorizontalHeaderLabels(("Ürün Kodu", "Ürün Adı", "Birim Fiyatı", "Stok Miktarı", "Ürün Açıklama",
+                                             "Marka", "Kategori" ))
+    sorgu = "select * from urun"
+    islem.execute(sorgu)
+
+    for indexSatir, kayitNumarasi in enumerate(islem):
+        for indexSutun, kayitSutun in enumerate(kayitNumarasi):
+            ui.tblListele.setItem(indexSatir,indexSutun,QTableWidgetItem(str(kayitSutun)))
+
+
+                                                          
 
 # Buton işlemleri
 ui.btnEkle.clicked.connect(kayit_ekle)
-
+ui.btnListele.clicked.connect(kayit_listele)
 
 sys.exit(uygulama.exec_())
