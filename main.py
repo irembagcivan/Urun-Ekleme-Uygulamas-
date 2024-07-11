@@ -53,11 +53,26 @@ def kayit_listele():
         for indexSutun, kayitSutun in enumerate(kayitNumarasi):
             ui.tblListele.setItem(indexSatir,indexSutun,QTableWidgetItem(str(kayitSutun)))
 
+def kategoriye_gore_listele():
+    listelenecek_kategori = ui.cmbKategoriListele.currentText()
+
+    sorgu = "select * from urun where kategori = ?"
+    islem.execute(sorgu,(listelenecek_kategori,))
+    ui.tblListele.clear()
+
+    for indexSatir, kayitNumarasi in enumerate(islem):
+        for indexSutun, kayitSutun in enumerate(kayitNumarasi):
+            ui.tblListele.setItem(indexSatir,indexSutun,QTableWidgetItem(str(kayitSutun)))
+
+
+
 
                                                           
 
 # Buton işlemleri
 ui.btnEkle.clicked.connect(kayit_ekle)
 ui.btnListele.clicked.connect(kayit_listele)
+ui.btnKategoriyeGoreListele.clicked.connect(kategoriye_gore_listele)
+
 
 sys.exit(uygulama.exec_())
