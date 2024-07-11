@@ -36,6 +36,29 @@
       <height>61</height>
      </rect>
     </property>
+    <property name="currentIndex">
+     <number>-1</number>
+    </property>
+    <item>
+     <property name="text">
+      <string>Acer</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Samsung</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Apple</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Oppo</string>
+     </property>
+    </item>
    </widget>
    <widget class="QComboBox" name="cmbKategori">
     <property name="geometry">
@@ -46,6 +69,24 @@
       <height>61</height>
      </rect>
     </property>
+    <property name="currentIndex">
+     <number>-1</number>
+    </property>
+    <item>
+     <property name="text">
+      <string>Telefon</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Bilgisayar</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Beyaz Eşya</string>
+     </property>
+    </item>
    </widget>
    <widget class="QLabel" name="label_6">
     <property name="geometry">
@@ -270,7 +311,26 @@
       </widget>
      </item>
      <item>
-      <widget class="QComboBox" name="cmbKategoriListele"/>
+      <widget class="QComboBox" name="cmbKategoriListele">
+       <property name="currentIndex">
+        <number>-1</number>
+       </property>
+       <item>
+        <property name="text">
+         <string>Telefon</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Bilgisayar</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Beyaz Eşya</string>
+        </property>
+       </item>
+      </widget>
      </item>
      <item>
       <widget class="QPushButton" name="btnKategoriyeGoreListele">
