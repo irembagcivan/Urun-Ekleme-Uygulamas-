@@ -23,6 +23,7 @@ table = islem.execute("create table if not exists urun (urunKodu int, urunAdi te
 üzerinden işlemleri gerçekleştirecektir."""
 baglanti.commit()
 
+
 def kayit_ekle():
     UrunKodu = int(ui.lneurunKodu.text())
     UrunAdi = ui.lneurunAdi.text()
@@ -42,6 +43,7 @@ def kayit_ekle():
     except Exception as error:
         ui.statusbar.showMessage("Kayıt eklenemedi!" + str(error))
 
+
 def kayit_listele():
     ui.tblListele.clear()
     ui.tblListele.setHorizontalHeaderLabels(("Ürün Kodu", "Ürün Adı", "Birim Fiyatı", "Stok Miktarı", "Ürün Açıklama",
@@ -52,6 +54,7 @@ def kayit_listele():
     for indexSatir, kayitNumarasi in enumerate(islem):
         for indexSutun, kayitSutun in enumerate(kayitNumarasi):
             ui.tblListele.setItem(indexSatir,indexSutun,QTableWidgetItem(str(kayitSutun)))
+
 
 def kategoriye_gore_listele():
     listelenecek_kategori = ui.cmbKategoriListele.currentText()
@@ -64,7 +67,27 @@ def kategoriye_gore_listele():
         for indexSutun, kayitSutun in enumerate(kayitNumarasi):
             ui.tblListele.setItem(indexSatir,indexSutun,QTableWidgetItem(str(kayitSutun)))
 
+def kayit_sil():
+    sil_mesaj = QMessageBox.question(pencere, "Silme Onayı", "Silmek istediğinizden emin misiniz?",
+                QMessageBox.Yes | QMessageBox.No)
+    
+    if sil_mesaj == QMessageBox.Yes:
+        secilen_kayit = ui.tblListele.selectedItems()
+        silinecek_kayit = secilen_kayit[0].text()
 
+        sorgu = "delete from urun where urunKodu = ?"
+
+        try:
+            islem.execute(sorgu,(silinecek_kayit,))
+            baglanti.commit()
+            ui.statusbar.showMessage("Kayıt başarıyla silindi!")
+            kayit_listele()
+        except Exception as error:
+            ui.statusbar.showMessage("Kayıt silinemedi!" + str(error))
+
+    else:
+        ui.statusbar.showMessage("Silme işlemi iptal edildi!")
+    
 
 
                                                           
@@ -73,6 +96,6 @@ def kategoriye_gore_listele():
 ui.btnEkle.clicked.connect(kayit_ekle)
 ui.btnListele.clicked.connect(kayit_listele)
 ui.btnKategoriyeGoreListele.clicked.connect(kategoriye_gore_listele)
-
+ui.btnSil.clicked.connect(kayit_sil)
 
 sys.exit(uygulama.exec_())
